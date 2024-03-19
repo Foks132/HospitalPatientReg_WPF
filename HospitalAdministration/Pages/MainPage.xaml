@@ -1,0 +1,43 @@
+﻿<Page x:Class="HospitalAdministration.Pages.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:HospitalAdministration.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Главное меню">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <UniformGrid HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0">
+            <Button Background="Transparent" Template="{DynamicResource ButtonTemplateRadius}" x:Name="btnScheduleList" Click="btnScheduleList_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Расписание" Margin="5 0"/>
+                    <Image Source="/Resource/icons8-schedule-48.png"/>
+                </StackPanel>
+            </Button>
+            <Button Visibility="Collapsed" Background="Transparent" Template="{DynamicResource ButtonTemplateRadius}" x:Name="btnPatientRecordsList" Click="btnPatientRecordsList_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Запись" Margin="5 0"/>
+                    <Image Source="/Resource/icons8-appointment-scheduling-48.png"/>
+                </StackPanel>
+            </Button>
+            <Button Visibility="Collapsed" Background="Transparent" Template="{DynamicResource ButtonTemplateRadius}" x:Name="btnAddPatient" Click="btnAddPatient_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Новый пациент" Margin="5 0"/>
+                    <Image Source="/Resource/icons8-plus-48.png"/>
+                </StackPanel>
+            </Button>
+            <Button Visibility="Collapsed" Background="Transparent" Template="{DynamicResource ButtonTemplateRadius}" x:Name="btnAddDirection" Click="btnAddDirection_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Направление" Margin="5 0"/>
+                    <Image Source="/Resource/icons8-plus-48.png"/>
+                </StackPanel>
+            </Button>
+        </UniformGrid>
+    </Grid>
+</Page>

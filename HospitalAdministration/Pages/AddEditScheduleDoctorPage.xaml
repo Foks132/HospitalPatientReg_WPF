@@ -1,0 +1,32 @@
+﻿<Page x:Class="HospitalAdministration.Pages.AddEditScheduleDoctorPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:HospitalAdministration.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddEditScheduleDoctorPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="300">
+            <Label Content="Врач"/>
+            <ComboBox Name="CbDoctor" DisplayMemberPath="DoctorWithCategory" SelectedItem="{Binding D_Doctor}"/>
+            <Label Content="Дата"/>
+            <DatePicker FontSize="16" Name="DpWorkDate" SelectedDate="{Binding Date}"/>
+            <Label Content="Начало рабочего дня"/>
+            <TextBox Template="{DynamicResource TextBoxTemplateRadius}" Name="TbStartTime" Text="{Binding TimeBeginDay}"/>
+            <Label Content="Конец рабочего дня"/>
+            <TextBox Template="{DynamicResource TextBoxTemplateRadius}" Name="TbEndTime" Text="{Binding TimeEndDay}"/>
+            <Button Template="{DynamicResource ButtonTemplateRadius}" Name="btnSave" Background="{StaticResource Accent}" Click="btnSave_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Сохранить" Margin="5 0"/>
+                    <Image Source="/Resource/icons8-save-48.png"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>

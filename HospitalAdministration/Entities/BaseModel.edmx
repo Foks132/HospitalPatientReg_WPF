@@ -1,0 +1,1068 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище MedDbModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="D_Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="D_ChangeType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Change" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="D_Diagnosis">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Diagnosis" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="D_Doctor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="SecondName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Category" Type="int" />
+        </EntityType>
+        <EntityType Name="D_DoctorGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="DoctorId" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="DoctorId" Type="int" Nullable="false" />
+          <Property Name="isDoctorChief" Type="bit" />
+        </EntityType>
+        <EntityType Name="D_DoctorWorkSchedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="TimeBeginDay" Type="time" Precision="4" Nullable="false" />
+          <Property Name="TimeEndDay" Type="time" Precision="4" Nullable="false" />
+          <Property Name="isWorked" Type="bit" />
+          <Property Name="DoctorId" Type="int" Nullable="false" />
+          <Property Name="isApproved" Type="bit" />
+        </EntityType>
+        <EntityType Name="D_DoctorWorkSchedule_History">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="DateChange" />
+            <PropertyRef Name="TimeChange" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="TimeBeginDay" Type="time" Precision="4" />
+          <Property Name="TimeEndDay" Type="time" Precision="4" />
+          <Property Name="isWorked" Type="bit" />
+          <Property Name="DoctorId" Type="int" />
+          <Property Name="DateChange" Type="date" Nullable="false" />
+          <Property Name="TimeChange" Type="time" Precision="4" Nullable="false" />
+          <Property Name="TypeChange" Type="int" />
+        </EntityType>
+        <EntityType Name="D_Gender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="D_HistoryDiagnosis">
+          <Key>
+            <PropertyRef Name="Patient" />
+            <PropertyRef Name="Diagnosis" />
+          </Key>
+          <Property Name="Patient" Type="int" Nullable="false" />
+          <Property Name="Diagnosis" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="D_HospitalBedFund">
+          <Key>
+            <PropertyRef Name="Room" />
+            <PropertyRef Name="Bed" />
+          </Key>
+          <Property Name="Room" Type="int" Nullable="false" />
+          <Property Name="Bed" Type="int" Nullable="false" />
+          <Property Name="PatientId" Type="int" />
+        </EntityType>
+        <EntityType Name="D_Patient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Photo" Type="nvarchar(max)" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="SecondName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Passport" Type="nvarchar" MaxLength="10" />
+          <Property Name="Birthday" Type="date" />
+          <Property Name="Gender" Type="int" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="12" />
+          <Property Name="Email" Type="nchar" MaxLength="50" />
+          <Property Name="Medcard" Type="nvarchar" MaxLength="11" />
+          <Property Name="MedcardDate" Type="date" />
+          <Property Name="LastVizitDate" Type="date" />
+          <Property Name="VizitDate" Type="date" />
+          <Property Name="InsPolicy" Type="nvarchar" MaxLength="30" />
+          <Property Name="InsPolicyDate" Type="date" />
+        </EntityType>
+        <EntityType Name="D_ReceptionSchedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Time" Type="time" Precision="4" Nullable="false" />
+          <Property Name="PatientId" Type="int" />
+          <Property Name="isVisited" Type="bit" />
+          <Property Name="DoctorGroupId" Type="int" />
+        </EntityType>
+        <EntityType Name="D_Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="D_User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Role" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TherapeuticPatient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="PatientId" Type="int" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="DoctorId" Type="int" Nullable="false" />
+          <Property Name="Type" Type="int" />
+          <Property Name="Result" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Recommendations" Type="nvarchar(max)" />
+          <Property Name="Time" Type="time" Precision="4" />
+        </EntityType>
+        <Association Name="FK_D_Doctor_D_Category">
+          <End Role="D_Category" Type="Self.D_Category" Multiplicity="0..1" />
+          <End Role="D_Doctor" Type="Self.D_Doctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="D_Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="D_Doctor">
+              <PropertyRef Name="Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_D_DoctorGroup_D_Doctor">
+          <End Role="D_Doctor" Type="Self.D_Doctor" Multiplicity="1" />
+          <End Role="D_DoctorGroup" Type="Self.D_DoctorGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="D_Doctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="D_DoctorGroup">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_D_DoctorGroup_D_ReceptionSchedule">
+          <End Role="D_ReceptionSchedule" Type="Self.D_ReceptionSchedule" Multiplicity="1" />
+          <End Role="D_DoctorGroup" Type="Self.D_DoctorGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="D_ReceptionSchedule">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="D_DoctorGroup">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_D_DoctorWorkSchedule_D_Doctor">
+          <End Role="D_Doctor" Type="Self.D_Doctor" Multiplicity="1" />
+          <End Role="D_DoctorWorkSchedule" Type="Self.D_DoctorWorkSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="D_Doctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="D_DoctorWorkSchedule">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_D_DoctorWorkSchedule_History_D_ChangeType">
+          <End Role="D_ChangeType" Type="Self.D_ChangeType" Multiplicity="0..1" />
+          <End Role="D_DoctorWorkSchedule_History" Type="Self.D_DoctorWorkSchedule_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="D_ChangeType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="D_DoctorWorkSchedule_History">
+              <PropertyRef Name="TypeChange" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_D_DoctorWorkSchedule_History_D_Doctor">
+          <End Role="D_Doctor" Type="Self.D_Doctor" Multiplicity="0..1" />
+          <End Role="D_DoctorWorkSchedule_History" Type="Self.D_DoctorWorkSchedule_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="D_Doctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="D_DoctorWorkSchedule_History">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_D_HistoryDiagnosis_D_Diagnosis">
+          <End Role="D_Diagnosis" Type="Self.D_Diagnosis" Multiplicity="1" />
+          <End Role="D_HistoryDiagnosis" Type="Self.D_HistoryDiagnosis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="D_Diagnosis">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="D_HistoryDiagnosis">
+              <PropertyRef Name="Diagnosis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_D_HistoryDiagnosis_D_Patient1">
+          <End Role="D_Patient" Type="Self.D_Patient" Multiplicity="1" />
+          <End Role="D_HistoryDiagnosis" Type="Self.D_HistoryDiagnosis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="D_Patient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="D_HistoryDiagnosis">
+              <PropertyRef Name="Patient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_D_HospitalBedFund_D_Patient">
+          <End Role="D_Patient" Type="Self.D_Patient" Multiplicity="0..1" />
+          <End Role="D_HospitalBedFund" Type="Self.D_HospitalBedFund" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="D_Patient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="D_HospitalBedFund">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_D_Patient_D_Gender">
+          <End Role="D_Gender" Type="Self.D_Gender" Multiplicity="0..1" />
+          <End Role="D_Patient" Type="Self.D_Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="D_Gender">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="D_Patient">
+              <PropertyRef Name="Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_D_ReceptionSchedule_D_Patient">
+          <End Role="D_Patient" Type="Self.D_Patient" Multiplicity="0..1" />
+          <End Role="D_ReceptionSchedule" Type="Self.D_ReceptionSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="D_Patient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="D_ReceptionSchedule">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_D_User_D_Role">
+          <End Role="D_Role" Type="Self.D_Role" Multiplicity="0..1" />
+          <End Role="D_User" Type="Self.D_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="D_Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="D_User">
+              <PropertyRef Name="Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TherapeuticPatient_D_Doctor">
+          <End Role="D_Doctor" Type="Self.D_Doctor" Multiplicity="1" />
+          <End Role="TherapeuticPatient" Type="Self.TherapeuticPatient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="D_Doctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TherapeuticPatient">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TherapeuticPatient_D_Patient">
+          <End Role="D_Patient" Type="Self.D_Patient" Multiplicity="0..1" />
+          <End Role="TherapeuticPatient" Type="Self.TherapeuticPatient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="D_Patient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TherapeuticPatient">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище MedDbModelContainer">
+          <EntitySet Name="D_Category" EntityType="Self.D_Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="D_ChangeType" EntityType="Self.D_ChangeType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="D_Diagnosis" EntityType="Self.D_Diagnosis" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="D_Doctor" EntityType="Self.D_Doctor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="D_DoctorGroup" EntityType="Self.D_DoctorGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="D_DoctorWorkSchedule" EntityType="Self.D_DoctorWorkSchedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="D_DoctorWorkSchedule_History" EntityType="Self.D_DoctorWorkSchedule_History" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="D_Gender" EntityType="Self.D_Gender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="D_HistoryDiagnosis" EntityType="Self.D_HistoryDiagnosis" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="D_HospitalBedFund" EntityType="Self.D_HospitalBedFund" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="D_Patient" EntityType="Self.D_Patient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="D_ReceptionSchedule" EntityType="Self.D_ReceptionSchedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="D_Role" EntityType="Self.D_Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="D_User" EntityType="Self.D_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TherapeuticPatient" EntityType="Self.TherapeuticPatient" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_D_Doctor_D_Category" Association="Self.FK_D_Doctor_D_Category">
+            <End Role="D_Category" EntitySet="D_Category" />
+            <End Role="D_Doctor" EntitySet="D_Doctor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_D_DoctorGroup_D_Doctor" Association="Self.FK_D_DoctorGroup_D_Doctor">
+            <End Role="D_Doctor" EntitySet="D_Doctor" />
+            <End Role="D_DoctorGroup" EntitySet="D_DoctorGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_D_DoctorGroup_D_ReceptionSchedule" Association="Self.FK_D_DoctorGroup_D_ReceptionSchedule">
+            <End Role="D_ReceptionSchedule" EntitySet="D_ReceptionSchedule" />
+            <End Role="D_DoctorGroup" EntitySet="D_DoctorGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_D_DoctorWorkSchedule_D_Doctor" Association="Self.FK_D_DoctorWorkSchedule_D_Doctor">
+            <End Role="D_Doctor" EntitySet="D_Doctor" />
+            <End Role="D_DoctorWorkSchedule" EntitySet="D_DoctorWorkSchedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_D_DoctorWorkSchedule_History_D_ChangeType" Association="Self.FK_D_DoctorWorkSchedule_History_D_ChangeType">
+            <End Role="D_ChangeType" EntitySet="D_ChangeType" />
+            <End Role="D_DoctorWorkSchedule_History" EntitySet="D_DoctorWorkSchedule_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_D_DoctorWorkSchedule_History_D_Doctor" Association="Self.FK_D_DoctorWorkSchedule_History_D_Doctor">
+            <End Role="D_Doctor" EntitySet="D_Doctor" />
+            <End Role="D_DoctorWorkSchedule_History" EntitySet="D_DoctorWorkSchedule_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_D_HistoryDiagnosis_D_Diagnosis" Association="Self.FK_D_HistoryDiagnosis_D_Diagnosis">
+            <End Role="D_Diagnosis" EntitySet="D_Diagnosis" />
+            <End Role="D_HistoryDiagnosis" EntitySet="D_HistoryDiagnosis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_D_HistoryDiagnosis_D_Patient1" Association="Self.FK_D_HistoryDiagnosis_D_Patient1">
+            <End Role="D_Patient" EntitySet="D_Patient" />
+            <End Role="D_HistoryDiagnosis" EntitySet="D_HistoryDiagnosis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_D_HospitalBedFund_D_Patient" Association="Self.FK_D_HospitalBedFund_D_Patient">
+            <End Role="D_Patient" EntitySet="D_Patient" />
+            <End Role="D_HospitalBedFund" EntitySet="D_HospitalBedFund" />
+          </AssociationSet>
+          <AssociationSet Name="FK_D_Patient_D_Gender" Association="Self.FK_D_Patient_D_Gender">
+            <End Role="D_Gender" EntitySet="D_Gender" />
+            <End Role="D_Patient" EntitySet="D_Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_D_ReceptionSchedule_D_Patient" Association="Self.FK_D_ReceptionSchedule_D_Patient">
+            <End Role="D_Patient" EntitySet="D_Patient" />
+            <End Role="D_ReceptionSchedule" EntitySet="D_ReceptionSchedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_D_User_D_Role" Association="Self.FK_D_User_D_Role">
+            <End Role="D_Role" EntitySet="D_Role" />
+            <End Role="D_User" EntitySet="D_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TherapeuticPatient_D_Doctor" Association="Self.FK_TherapeuticPatient_D_Doctor">
+            <End Role="D_Doctor" EntitySet="D_Doctor" />
+            <End Role="TherapeuticPatient" EntitySet="TherapeuticPatient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TherapeuticPatient_D_Patient" Association="Self.FK_TherapeuticPatient_D_Patient">
+            <End Role="D_Patient" EntitySet="D_Patient" />
+            <End Role="TherapeuticPatient" EntitySet="TherapeuticPatient" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MedDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MedDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="D_Category" EntityType="MedDbModel.D_Category" />
+          <EntitySet Name="D_ChangeType" EntityType="MedDbModel.D_ChangeType" />
+          <EntitySet Name="D_Diagnosis" EntityType="MedDbModel.D_Diagnosis" />
+          <EntitySet Name="D_Doctor" EntityType="MedDbModel.D_Doctor" />
+          <EntitySet Name="D_DoctorGroup" EntityType="MedDbModel.D_DoctorGroup" />
+          <EntitySet Name="D_DoctorWorkSchedule" EntityType="MedDbModel.D_DoctorWorkSchedule" />
+          <EntitySet Name="D_DoctorWorkSchedule_History" EntityType="MedDbModel.D_DoctorWorkSchedule_History" />
+          <EntitySet Name="D_Gender" EntityType="MedDbModel.D_Gender" />
+          <EntitySet Name="D_HistoryDiagnosis" EntityType="MedDbModel.D_HistoryDiagnosis" />
+          <EntitySet Name="D_HospitalBedFund" EntityType="MedDbModel.D_HospitalBedFund" />
+          <EntitySet Name="D_Patient" EntityType="MedDbModel.D_Patient" />
+          <EntitySet Name="D_ReceptionSchedule" EntityType="MedDbModel.D_ReceptionSchedule" />
+          <EntitySet Name="D_Role" EntityType="MedDbModel.D_Role" />
+          <EntitySet Name="D_User" EntityType="MedDbModel.D_User" />
+          <EntitySet Name="sysdiagrams" EntityType="MedDbModel.sysdiagram" />
+          <EntitySet Name="TherapeuticPatients" EntityType="MedDbModel.TherapeuticPatient" />
+          <AssociationSet Name="FK_D_Doctor_D_Category" Association="MedDbModel.FK_D_Doctor_D_Category">
+            <End Role="D_Category" EntitySet="D_Category" />
+            <End Role="D_Doctor" EntitySet="D_Doctor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_D_DoctorWorkSchedule_History_D_ChangeType" Association="MedDbModel.FK_D_DoctorWorkSchedule_History_D_ChangeType">
+            <End Role="D_ChangeType" EntitySet="D_ChangeType" />
+            <End Role="D_DoctorWorkSchedule_History" EntitySet="D_DoctorWorkSchedule_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_D_HistoryDiagnosis_D_Diagnosis" Association="MedDbModel.FK_D_HistoryDiagnosis_D_Diagnosis">
+            <End Role="D_Diagnosis" EntitySet="D_Diagnosis" />
+            <End Role="D_HistoryDiagnosis" EntitySet="D_HistoryDiagnosis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_D_DoctorGroup_D_Doctor" Association="MedDbModel.FK_D_DoctorGroup_D_Doctor">
+            <End Role="D_Doctor" EntitySet="D_Doctor" />
+            <End Role="D_DoctorGroup" EntitySet="D_DoctorGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_D_DoctorWorkSchedule_D_Doctor" Association="MedDbModel.FK_D_DoctorWorkSchedule_D_Doctor">
+            <End Role="D_Doctor" EntitySet="D_Doctor" />
+            <End Role="D_DoctorWorkSchedule" EntitySet="D_DoctorWorkSchedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_D_DoctorWorkSchedule_History_D_Doctor" Association="MedDbModel.FK_D_DoctorWorkSchedule_History_D_Doctor">
+            <End Role="D_Doctor" EntitySet="D_Doctor" />
+            <End Role="D_DoctorWorkSchedule_History" EntitySet="D_DoctorWorkSchedule_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TherapeuticPatient_D_Doctor" Association="MedDbModel.FK_TherapeuticPatient_D_Doctor">
+            <End Role="D_Doctor" EntitySet="D_Doctor" />
+            <End Role="TherapeuticPatient" EntitySet="TherapeuticPatients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_D_DoctorGroup_D_ReceptionSchedule" Association="MedDbModel.FK_D_DoctorGroup_D_ReceptionSchedule">
+            <End Role="D_ReceptionSchedule" EntitySet="D_ReceptionSchedule" />
+            <End Role="D_DoctorGroup" EntitySet="D_DoctorGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_D_Patient_D_Gender" Association="MedDbModel.FK_D_Patient_D_Gender">
+            <End Role="D_Gender" EntitySet="D_Gender" />
+            <End Role="D_Patient" EntitySet="D_Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK_D_HistoryDiagnosis_D_Patient1" Association="MedDbModel.FK_D_HistoryDiagnosis_D_Patient1">
+            <End Role="D_Patient" EntitySet="D_Patient" />
+            <End Role="D_HistoryDiagnosis" EntitySet="D_HistoryDiagnosis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_D_HospitalBedFund_D_Patient" Association="MedDbModel.FK_D_HospitalBedFund_D_Patient">
+            <End Role="D_Patient" EntitySet="D_Patient" />
+            <End Role="D_HospitalBedFund" EntitySet="D_HospitalBedFund" />
+          </AssociationSet>
+          <AssociationSet Name="FK_D_ReceptionSchedule_D_Patient" Association="MedDbModel.FK_D_ReceptionSchedule_D_Patient">
+            <End Role="D_Patient" EntitySet="D_Patient" />
+            <End Role="D_ReceptionSchedule" EntitySet="D_ReceptionSchedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TherapeuticPatient_D_Patient" Association="MedDbModel.FK_TherapeuticPatient_D_Patient">
+            <End Role="D_Patient" EntitySet="D_Patient" />
+            <End Role="TherapeuticPatient" EntitySet="TherapeuticPatients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_D_User_D_Role" Association="MedDbModel.FK_D_User_D_Role">
+            <End Role="D_Role" EntitySet="D_Role" />
+            <End Role="D_User" EntitySet="D_User" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="D_Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="D_Doctor" Relationship="MedDbModel.FK_D_Doctor_D_Category" FromRole="D_Category" ToRole="D_Doctor" />
+        </EntityType>
+        <EntityType Name="D_ChangeType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Change" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="D_DoctorWorkSchedule_History" Relationship="MedDbModel.FK_D_DoctorWorkSchedule_History_D_ChangeType" FromRole="D_ChangeType" ToRole="D_DoctorWorkSchedule_History" />
+        </EntityType>
+        <EntityType Name="D_Diagnosis">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Diagnosis" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="D_HistoryDiagnosis" Relationship="MedDbModel.FK_D_HistoryDiagnosis_D_Diagnosis" FromRole="D_Diagnosis" ToRole="D_HistoryDiagnosis" />
+        </EntityType>
+        <EntityType Name="D_Doctor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SecondName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Category" Type="Int32" />
+          <NavigationProperty Name="D_Category" Relationship="MedDbModel.FK_D_Doctor_D_Category" FromRole="D_Doctor" ToRole="D_Category" />
+          <NavigationProperty Name="D_DoctorGroup" Relationship="MedDbModel.FK_D_DoctorGroup_D_Doctor" FromRole="D_Doctor" ToRole="D_DoctorGroup" />
+          <NavigationProperty Name="D_DoctorWorkSchedule" Relationship="MedDbModel.FK_D_DoctorWorkSchedule_D_Doctor" FromRole="D_Doctor" ToRole="D_DoctorWorkSchedule" />
+          <NavigationProperty Name="D_DoctorWorkSchedule_History" Relationship="MedDbModel.FK_D_DoctorWorkSchedule_History_D_Doctor" FromRole="D_Doctor" ToRole="D_DoctorWorkSchedule_History" />
+          <NavigationProperty Name="TherapeuticPatients" Relationship="MedDbModel.FK_TherapeuticPatient_D_Doctor" FromRole="D_Doctor" ToRole="TherapeuticPatient" />
+        </EntityType>
+        <EntityType Name="D_DoctorGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="DoctorId" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="DoctorId" Type="Int32" Nullable="false" />
+          <Property Name="isDoctorChief" Type="Boolean" />
+          <NavigationProperty Name="D_Doctor" Relationship="MedDbModel.FK_D_DoctorGroup_D_Doctor" FromRole="D_DoctorGroup" ToRole="D_Doctor" />
+          <NavigationProperty Name="D_ReceptionSchedule" Relationship="MedDbModel.FK_D_DoctorGroup_D_ReceptionSchedule" FromRole="D_DoctorGroup" ToRole="D_ReceptionSchedule" />
+        </EntityType>
+        <EntityType Name="D_DoctorWorkSchedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TimeBeginDay" Type="Time" Nullable="false" Precision="4" />
+          <Property Name="TimeEndDay" Type="Time" Nullable="false" Precision="4" />
+          <Property Name="isWorked" Type="Boolean" />
+          <Property Name="DoctorId" Type="Int32" Nullable="false" />
+          <Property Name="isApproved" Type="Boolean" />
+          <NavigationProperty Name="D_Doctor" Relationship="MedDbModel.FK_D_DoctorWorkSchedule_D_Doctor" FromRole="D_DoctorWorkSchedule" ToRole="D_Doctor" />
+        </EntityType>
+        <EntityType Name="D_DoctorWorkSchedule_History">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="DateChange" />
+            <PropertyRef Name="TimeChange" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="TimeBeginDay" Type="Time" Precision="4" />
+          <Property Name="TimeEndDay" Type="Time" Precision="4" />
+          <Property Name="isWorked" Type="Boolean" />
+          <Property Name="DoctorId" Type="Int32" />
+          <Property Name="DateChange" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TimeChange" Type="Time" Nullable="false" Precision="4" />
+          <Property Name="TypeChange" Type="Int32" />
+          <NavigationProperty Name="D_ChangeType" Relationship="MedDbModel.FK_D_DoctorWorkSchedule_History_D_ChangeType" FromRole="D_DoctorWorkSchedule_History" ToRole="D_ChangeType" />
+          <NavigationProperty Name="D_Doctor" Relationship="MedDbModel.FK_D_DoctorWorkSchedule_History_D_Doctor" FromRole="D_DoctorWorkSchedule_History" ToRole="D_Doctor" />
+        </EntityType>
+        <EntityType Name="D_Gender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="D_Patient" Relationship="MedDbModel.FK_D_Patient_D_Gender" FromRole="D_Gender" ToRole="D_Patient" />
+        </EntityType>
+        <EntityType Name="D_HistoryDiagnosis">
+          <Key>
+            <PropertyRef Name="Patient" />
+            <PropertyRef Name="Diagnosis" />
+          </Key>
+          <Property Name="Patient" Type="Int32" Nullable="false" />
+          <Property Name="Diagnosis" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="D_Diagnosis" Relationship="MedDbModel.FK_D_HistoryDiagnosis_D_Diagnosis" FromRole="D_HistoryDiagnosis" ToRole="D_Diagnosis" />
+          <NavigationProperty Name="D_Patient" Relationship="MedDbModel.FK_D_HistoryDiagnosis_D_Patient1" FromRole="D_HistoryDiagnosis" ToRole="D_Patient" />
+        </EntityType>
+        <EntityType Name="D_HospitalBedFund">
+          <Key>
+            <PropertyRef Name="Room" />
+            <PropertyRef Name="Bed" />
+          </Key>
+          <Property Name="Room" Type="Int32" Nullable="false" />
+          <Property Name="Bed" Type="Int32" Nullable="false" />
+          <Property Name="PatientId" Type="Int32" />
+          <NavigationProperty Name="D_Patient" Relationship="MedDbModel.FK_D_HospitalBedFund_D_Patient" FromRole="D_HospitalBedFund" ToRole="D_Patient" />
+        </EntityType>
+        <EntityType Name="D_Patient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SecondName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Passport" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Birthday" Type="DateTime" Precision="0" />
+          <Property Name="Gender" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Medcard" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="MedcardDate" Type="DateTime" Precision="0" />
+          <Property Name="LastVizitDate" Type="DateTime" Precision="0" />
+          <Property Name="VizitDate" Type="DateTime" Precision="0" />
+          <Property Name="InsPolicy" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="InsPolicyDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="D_Gender" Relationship="MedDbModel.FK_D_Patient_D_Gender" FromRole="D_Patient" ToRole="D_Gender" />
+          <NavigationProperty Name="D_HistoryDiagnosis" Relationship="MedDbModel.FK_D_HistoryDiagnosis_D_Patient1" FromRole="D_Patient" ToRole="D_HistoryDiagnosis" />
+          <NavigationProperty Name="D_HospitalBedFund" Relationship="MedDbModel.FK_D_HospitalBedFund_D_Patient" FromRole="D_Patient" ToRole="D_HospitalBedFund" />
+          <NavigationProperty Name="D_ReceptionSchedule" Relationship="MedDbModel.FK_D_ReceptionSchedule_D_Patient" FromRole="D_Patient" ToRole="D_ReceptionSchedule" />
+          <NavigationProperty Name="TherapeuticPatients" Relationship="MedDbModel.FK_TherapeuticPatient_D_Patient" FromRole="D_Patient" ToRole="TherapeuticPatient" />
+        </EntityType>
+        <EntityType Name="D_ReceptionSchedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Time" Type="Time" Nullable="false" Precision="4" />
+          <Property Name="PatientId" Type="Int32" />
+          <Property Name="isVisited" Type="Boolean" />
+          <Property Name="DoctorGroupId" Type="Int32" />
+          <NavigationProperty Name="D_DoctorGroup" Relationship="MedDbModel.FK_D_DoctorGroup_D_ReceptionSchedule" FromRole="D_ReceptionSchedule" ToRole="D_DoctorGroup" />
+          <NavigationProperty Name="D_Patient" Relationship="MedDbModel.FK_D_ReceptionSchedule_D_Patient" FromRole="D_ReceptionSchedule" ToRole="D_Patient" />
+        </EntityType>
+        <EntityType Name="D_Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="D_User" Relationship="MedDbModel.FK_D_User_D_Role" FromRole="D_Role" ToRole="D_User" />
+        </EntityType>
+        <EntityType Name="D_User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="Int32" />
+          <NavigationProperty Name="D_Role" Relationship="MedDbModel.FK_D_User_D_Role" FromRole="D_User" ToRole="D_Role" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TherapeuticPatient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="PatientId" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DoctorId" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="Result" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Recommendations" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="Time" Precision="4" />
+          <NavigationProperty Name="D_Doctor" Relationship="MedDbModel.FK_TherapeuticPatient_D_Doctor" FromRole="TherapeuticPatient" ToRole="D_Doctor" />
+          <NavigationProperty Name="D_Patient" Relationship="MedDbModel.FK_TherapeuticPatient_D_Patient" FromRole="TherapeuticPatient" ToRole="D_Patient" />
+        </EntityType>
+        <Association Name="FK_D_Doctor_D_Category">
+          <End Type="MedDbModel.D_Category" Role="D_Category" Multiplicity="0..1" />
+          <End Type="MedDbModel.D_Doctor" Role="D_Doctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="D_Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="D_Doctor">
+              <PropertyRef Name="Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_D_DoctorWorkSchedule_History_D_ChangeType">
+          <End Type="MedDbModel.D_ChangeType" Role="D_ChangeType" Multiplicity="0..1" />
+          <End Type="MedDbModel.D_DoctorWorkSchedule_History" Role="D_DoctorWorkSchedule_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="D_ChangeType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="D_DoctorWorkSchedule_History">
+              <PropertyRef Name="TypeChange" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_D_HistoryDiagnosis_D_Diagnosis">
+          <End Type="MedDbModel.D_Diagnosis" Role="D_Diagnosis" Multiplicity="1" />
+          <End Type="MedDbModel.D_HistoryDiagnosis" Role="D_HistoryDiagnosis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="D_Diagnosis">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="D_HistoryDiagnosis">
+              <PropertyRef Name="Diagnosis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_D_DoctorGroup_D_Doctor">
+          <End Type="MedDbModel.D_Doctor" Role="D_Doctor" Multiplicity="1" />
+          <End Type="MedDbModel.D_DoctorGroup" Role="D_DoctorGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="D_Doctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="D_DoctorGroup">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_D_DoctorWorkSchedule_D_Doctor">
+          <End Type="MedDbModel.D_Doctor" Role="D_Doctor" Multiplicity="1" />
+          <End Type="MedDbModel.D_DoctorWorkSchedule" Role="D_DoctorWorkSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="D_Doctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="D_DoctorWorkSchedule">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_D_DoctorWorkSchedule_History_D_Doctor">
+          <End Type="MedDbModel.D_Doctor" Role="D_Doctor" Multiplicity="0..1" />
+          <End Type="MedDbModel.D_DoctorWorkSchedule_History" Role="D_DoctorWorkSchedule_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="D_Doctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="D_DoctorWorkSchedule_History">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TherapeuticPatient_D_Doctor">
+          <End Type="MedDbModel.D_Doctor" Role="D_Doctor" Multiplicity="1" />
+          <End Type="MedDbModel.TherapeuticPatient" Role="TherapeuticPatient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="D_Doctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TherapeuticPatient">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_D_DoctorGroup_D_ReceptionSchedule">
+          <End Type="MedDbModel.D_ReceptionSchedule" Role="D_ReceptionSchedule" Multiplicity="1" />
+          <End Type="MedDbModel.D_DoctorGroup" Role="D_DoctorGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="D_ReceptionSchedule">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="D_DoctorGroup">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_D_Patient_D_Gender">
+          <End Type="MedDbModel.D_Gender" Role="D_Gender" Multiplicity="0..1" />
+          <End Type="MedDbModel.D_Patient" Role="D_Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="D_Gender">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="D_Patient">
+              <PropertyRef Name="Gender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_D_HistoryDiagnosis_D_Patient1">
+          <End Type="MedDbModel.D_Patient" Role="D_Patient" Multiplicity="1" />
+          <End Type="MedDbModel.D_HistoryDiagnosis" Role="D_HistoryDiagnosis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="D_Patient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="D_HistoryDiagnosis">
+              <PropertyRef Name="Patient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_D_HospitalBedFund_D_Patient">
+          <End Type="MedDbModel.D_Patient" Role="D_Patient" Multiplicity="0..1" />
+          <End Type="MedDbModel.D_HospitalBedFund" Role="D_HospitalBedFund" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="D_Patient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="D_HospitalBedFund">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_D_ReceptionSchedule_D_Patient">
+          <End Type="MedDbModel.D_Patient" Role="D_Patient" Multiplicity="0..1" />
+          <End Type="MedDbModel.D_ReceptionSchedule" Role="D_ReceptionSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="D_Patient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="D_ReceptionSchedule">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TherapeuticPatient_D_Patient">
+          <End Type="MedDbModel.D_Patient" Role="D_Patient" Multiplicity="0..1" />
+          <End Type="MedDbModel.TherapeuticPatient" Role="TherapeuticPatient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="D_Patient">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TherapeuticPatient">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_D_User_D_Role">
+          <End Type="MedDbModel.D_Role" Role="D_Role" Multiplicity="0..1" />
+          <End Type="MedDbModel.D_User" Role="D_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="D_Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="D_User">
+              <PropertyRef Name="Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище MedDbModelContainer" CdmEntityContainer="MedDbEntities">
+          <EntitySetMapping Name="D_Category">
+            <EntityTypeMapping TypeName="MedDbModel.D_Category">
+              <MappingFragment StoreEntitySet="D_Category">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="D_ChangeType">
+            <EntityTypeMapping TypeName="MedDbModel.D_ChangeType">
+              <MappingFragment StoreEntitySet="D_ChangeType">
+                <ScalarProperty Name="Change" ColumnName="Change" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="D_Diagnosis">
+            <EntityTypeMapping TypeName="MedDbModel.D_Diagnosis">
+              <MappingFragment StoreEntitySet="D_Diagnosis">
+                <ScalarProperty Name="Diagnosis" ColumnName="Diagnosis" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="D_Doctor">
+            <EntityTypeMapping TypeName="MedDbModel.D_Doctor">
+              <MappingFragment StoreEntitySet="D_Doctor">
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="SecondName" ColumnName="SecondName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="D_DoctorGroup">
+            <EntityTypeMapping TypeName="MedDbModel.D_DoctorGroup">
+              <MappingFragment StoreEntitySet="D_DoctorGroup">
+                <ScalarProperty Name="isDoctorChief" ColumnName="isDoctorChief" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="D_DoctorWorkSchedule">
+            <EntityTypeMapping TypeName="MedDbModel.D_DoctorWorkSchedule">
+              <MappingFragment StoreEntitySet="D_DoctorWorkSchedule">
+                <ScalarProperty Name="isApproved" ColumnName="isApproved" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="isWorked" ColumnName="isWorked" />
+                <ScalarProperty Name="TimeEndDay" ColumnName="TimeEndDay" />
+                <ScalarProperty Name="TimeBeginDay" ColumnName="TimeBeginDay" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="D_DoctorWorkSchedule_History">
+            <EntityTypeMapping TypeName="MedDbModel.D_DoctorWorkSchedule_History">
+              <MappingFragment StoreEntitySet="D_DoctorWorkSchedule_History">
+                <ScalarProperty Name="TypeChange" ColumnName="TypeChange" />
+                <ScalarProperty Name="TimeChange" ColumnName="TimeChange" />
+                <ScalarProperty Name="DateChange" ColumnName="DateChange" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="isWorked" ColumnName="isWorked" />
+                <ScalarProperty Name="TimeEndDay" ColumnName="TimeEndDay" />
+                <ScalarProperty Name="TimeBeginDay" ColumnName="TimeBeginDay" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="D_Gender">
+            <EntityTypeMapping TypeName="MedDbModel.D_Gender">
+              <MappingFragment StoreEntitySet="D_Gender">
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="D_HistoryDiagnosis">
+            <EntityTypeMapping TypeName="MedDbModel.D_HistoryDiagnosis">
+              <MappingFragment StoreEntitySet="D_HistoryDiagnosis">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Diagnosis" ColumnName="Diagnosis" />
+                <ScalarProperty Name="Patient" ColumnName="Patient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="D_HospitalBedFund">
+            <EntityTypeMapping TypeName="MedDbModel.D_HospitalBedFund">
+              <MappingFragment StoreEntitySet="D_HospitalBedFund">
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="Bed" ColumnName="Bed" />
+                <ScalarProperty Name="Room" ColumnName="Room" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="D_Patient">
+            <EntityTypeMapping TypeName="MedDbModel.D_Patient">
+              <MappingFragment StoreEntitySet="D_Patient">
+                <ScalarProperty Name="InsPolicyDate" ColumnName="InsPolicyDate" />
+                <ScalarProperty Name="InsPolicy" ColumnName="InsPolicy" />
+                <ScalarProperty Name="VizitDate" ColumnName="VizitDate" />
+                <ScalarProperty Name="LastVizitDate" ColumnName="LastVizitDate" />
+                <ScalarProperty Name="MedcardDate" ColumnName="MedcardDate" />
+                <ScalarProperty Name="Medcard" ColumnName="Medcard" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Passport" ColumnName="Passport" />
+                <ScalarProperty Name="SecondName" ColumnName="SecondName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="D_ReceptionSchedule">
+            <EntityTypeMapping TypeName="MedDbModel.D_ReceptionSchedule">
+              <MappingFragment StoreEntitySet="D_ReceptionSchedule">
+                <ScalarProperty Name="DoctorGroupId" ColumnName="DoctorGroupId" />
+                <ScalarProperty Name="isVisited" ColumnName="isVisited" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="D_Role">
+            <EntityTypeMapping TypeName="MedDbModel.D_Role">
+              <MappingFragment StoreEntitySet="D_Role">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="D_User">
+            <EntityTypeMapping TypeName="MedDbModel.D_User">
+              <MappingFragment StoreEntitySet="D_User">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="MedDbModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TherapeuticPatients">
+            <EntityTypeMapping TypeName="MedDbModel.TherapeuticPatient">
+              <MappingFragment StoreEntitySet="TherapeuticPatient">
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Recommendations" ColumnName="Recommendations" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
